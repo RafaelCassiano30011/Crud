@@ -19,7 +19,7 @@ const listaDeParent = {
     readbyid: (id) => {
         for (const parente of listaDeParent.data) {
 
-            if (id == parente.id) {
+            if (id === parente.id) {
                 return parente
 
             }
