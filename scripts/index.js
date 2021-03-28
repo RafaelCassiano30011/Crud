@@ -1,19 +1,20 @@
 import listaDeParent from './crud.js'
+import craterLi from './criarLi.js'
 
 const $inputs = document.querySelectorAll('.input')
 const $button = document.querySelector('.button')
-const $form = document.querySelector('.form')
+const $form = document.querySelector('.form-creat')
+const $formId = document.querySelector('.form-read-id')
+const $inputId = document.querySelector('.input-id')
 
-
+const $container = document.querySelector('.container')
+const $ul = document.querySelector('.ul-box')
 
 
 
 $form.addEventListener('submit', (event) => {
     event.preventDefault()
-    for (const input of $inputs) {
-        input.value = ''
-    }
-    const novoParent = {
+    let novoParent = {
         id: '',
         name: '',
         idade: '',
@@ -26,12 +27,32 @@ $form.addEventListener('submit', (event) => {
 
     listaDeParent.create(novoParent)
 
-
-    console.log(novoParent)
+    for (const input of $inputs) {
+        input.value = ''
+    }
+    craterLi()
+    console.log(parentes)
     return
 })
 
 
 
-const parentes = listaDeParent.read()
+$formId.addEventListener('submit', (event) => {
+    event.preventDefault()
+    let id = ''
+
+    id = parseInt($inputId.value)
+
+    const parent = listaDeParent.readbyid(id)
+    const li = `   <li class="li">
+    <Span class="span-id">ID ${parent.id}</Span>
+    <span class="span-nome">Nome ${parent.name}</span>
+    <span class="span-idade">Idade ${parent.idade}</span>
+    </li>`
+
+    $ul.innerHTML = li
+})
+
+
+
 const parent = listaDeParent.readbyid()
